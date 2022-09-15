@@ -1,28 +1,31 @@
 package com.example.NESTO_demo.Projects;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ProjectService {
-    private List<Project> projectList = new ArrayList<>( Arrays.asList(
-            new Project("8005", "Боднар вітальня"),
-            new Project("8006", "Боднар Спальня"),
-            new Project("8007", "Боднар Кухня"))
-    );
+
+    @Autowired
+    private ProjectRepository projectRepository;
 
     public List<Project> getAllProjects(){
-        return projectList;
+        ArrayList<Project> projectArrayList = new ArrayList<Project>();
+        projectRepository.findAll().forEach(projectArrayList::add);
+        return projectArrayList;
     }
-
     public Project getProject(String id){
-        return projectList.stream().filter(project -> project.ID.equals(id)).findFirst().get();
+        Optional<Project> project;
+        project = projectRepository.findById(id);
+        return project.get();
     }
-
     public void addProject(Project project){
-        projectList.add(project);
+        projectRepository.save(project);
     }
+    public void updateProject(Project project, String ID){
+        projectRepository.save(project);
+    }
+    public void deleteProject(Project project, String id) {projectRepository.deleteById(id);}
 }
