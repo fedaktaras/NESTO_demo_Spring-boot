@@ -1,9 +1,13 @@
 package com.example.NESTO_demo.Projects;
 
+import com.example.NESTO_demo.Projects.Project;
+import com.example.NESTO_demo.Projects.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectService {
@@ -16,7 +20,7 @@ public class ProjectService {
         projectRepository.findAll().forEach(projectArrayList::add);
         return projectArrayList;
     }
-    public Project getProject(String id){
+    public Project getProject(Integer id){
         Optional<Project> project;
         project = projectRepository.findById(id);
         return project.get();
@@ -24,8 +28,8 @@ public class ProjectService {
     public void addProject(Project project){
         projectRepository.save(project);
     }
-    public void updateProject(Project project, String ID){
+    public void updateProject(Project project, Integer ID){
         projectRepository.save(project);
     }
-    public void deleteProject(Project project, String id) {projectRepository.deleteById(id);}
+    public void deleteProject(Project project, Integer id) {projectRepository.deleteById(id);}
 }

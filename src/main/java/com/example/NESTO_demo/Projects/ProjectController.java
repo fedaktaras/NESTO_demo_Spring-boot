@@ -1,10 +1,7 @@
 package com.example.NESTO_demo.Projects;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class ProjectController {
@@ -18,7 +15,7 @@ public class ProjectController {
     }
 
     @RequestMapping("/projects/{ID}")
-    public Project getProject(@PathVariable String ID){
+    public Project getProject(@PathVariable Integer ID){
         System.out.println(ID);
         return projectService.getProject(ID);
     }
@@ -29,11 +26,11 @@ public class ProjectController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/projects/{ID}")
-    public void updateProject(@RequestBody Project project, @PathVariable String ID){
+    public void updateProject(@RequestBody Project project, @PathVariable Integer ID){
         projectService.updateProject(project, ID);
     }
     @RequestMapping(method = RequestMethod.DELETE, value = "/projects/{ID}")
-    public void deleteProject(@RequestBody Project project, @PathVariable String ID){
+    public void deleteProject(@RequestBody Project project, @PathVariable Integer ID){
         projectService.deleteProject(project, ID);
     }
 }

@@ -1,35 +1,27 @@
 package com.example.NESTO_demo.Projects;
 
-import Emploee.SalePerson;
-import jdk.jfr.Enabled;
+import com.example.NESTO_demo.Emploee.Employee;
 
 import javax.persistence.*;
-import java.beans.Customizer;
 
 @Entity
 @Table
 public class Project {
     @Id
-    public String ID;
-
+    public Integer ID;
     public String client;
-
-    public String salePerson;
+    @ManyToOne
+    @JoinColumn(name="employee_id", nullable=false)
+    public Employee salePerson;
     public double price;
 
     public Project(){
 
     }
-    public Project(String id, String client) {
+    public Project(Integer id, String client, Employee employee) {
         this.client = client;
         this.ID = id;
+        salePerson = employee;
     }
-    public Project createCopy(){
-        Project project = new Project();
-        project.ID = this.ID;
-        project.client = this.client;
-        project.price = this.price;
-        project.salePerson = this.salePerson;
-        return  project;
-    }
+
 }
